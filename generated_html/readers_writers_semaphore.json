@@ -1,0 +1,1256 @@
+{
+ "title": "Readers-Writers (Semaphores)",
+ "kind": "rw",
+ "params": {
+  "solution": "semaphore",
+  "readers": 4,
+  "writers": 2,
+  "rounds": 3,
+  "delay": 0.3
+ },
+ "violations": 0,
+ "events": [
+  {
+   "seq": 0,
+   "t_ms": 29,
+   "msg": "W1 wants to write",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 0
+    }
+   }
+  },
+  {
+   "seq": 1,
+   "t_ms": 29,
+   "msg": "W1 enters critical section (writing)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Writing",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W1",
+     "value": 0
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "t_ms": 93,
+   "msg": "R2 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Waiting",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Writing",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W1",
+     "value": 0
+    }
+   }
+  },
+  {
+   "seq": 3,
+   "t_ms": 107,
+   "msg": "W1 leaves critical section (value is now 1)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Waiting",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 4,
+   "t_ms": 107,
+   "msg": "R2 enters critical section (reads value = 1)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 5,
+   "t_ms": 150,
+   "msg": "W1 wants to write",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 6,
+   "t_ms": 159,
+   "msg": "R4 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 7,
+   "t_ms": 159,
+   "msg": "R4 enters critical section (reads value = 1)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 8,
+   "t_ms": 177,
+   "msg": "W2 wants to write",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 9,
+   "t_ms": 236,
+   "msg": "R2 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 10,
+   "t_ms": 247,
+   "msg": "R4 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 11,
+   "t_ms": 247,
+   "msg": "W1 enters critical section (writing)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Writing",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W1",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 12,
+   "t_ms": 254,
+   "msg": "R1 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Writing",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W1",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 13,
+   "t_ms": 296,
+   "msg": "R3 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Thinking",
+     "R3": "Waiting",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Writing",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W1",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 14,
+   "t_ms": 315,
+   "msg": "R4 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Thinking",
+     "R3": "Waiting",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Writing",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W1",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 15,
+   "t_ms": 334,
+   "msg": "R2 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Waiting",
+     "R3": "Waiting",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Writing",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W1",
+     "value": 1
+    }
+   }
+  },
+  {
+   "seq": 16,
+   "t_ms": 508,
+   "msg": "W1 leaves critical section (value is now 2)",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Waiting",
+     "R3": "Waiting",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 2
+    }
+   }
+  },
+  {
+   "seq": 17,
+   "t_ms": 509,
+   "msg": "W2 enters critical section (writing)",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Waiting",
+     "R3": "Waiting",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Writing"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W2",
+     "value": 2
+    }
+   }
+  },
+  {
+   "seq": 18,
+   "t_ms": 528,
+   "msg": "W1 wants to write",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Waiting",
+     "R3": "Waiting",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Writing"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W2",
+     "value": 2
+    }
+   }
+  },
+  {
+   "seq": 19,
+   "t_ms": 606,
+   "msg": "W2 leaves critical section (value is now 3)",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Waiting",
+     "R3": "Waiting",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 20,
+   "t_ms": 607,
+   "msg": "R1 enters critical section (reads value = 3)",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Waiting",
+     "R3": "Waiting",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 21,
+   "t_ms": 607,
+   "msg": "R3 enters critical section (reads value = 3)",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Waiting",
+     "R3": "Reading",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 22,
+   "t_ms": 607,
+   "msg": "R4 enters critical section (reads value = 3)",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Waiting",
+     "R3": "Reading",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 3,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 23,
+   "t_ms": 607,
+   "msg": "R2 enters critical section (reads value = 3)",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Reading",
+     "R3": "Reading",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 4,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 24,
+   "t_ms": 617,
+   "msg": "R2 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Thinking",
+     "R3": "Reading",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 3,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 25,
+   "t_ms": 656,
+   "msg": "R3 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 26,
+   "t_ms": 683,
+   "msg": "R4 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 27,
+   "t_ms": 731,
+   "msg": "R2 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Waiting",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 28,
+   "t_ms": 731,
+   "msg": "R2 enters critical section (reads value = 3)",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 29,
+   "t_ms": 805,
+   "msg": "R4 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Waiting"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 30,
+   "t_ms": 805,
+   "msg": "R4 enters critical section (reads value = 3)",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 3,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 31,
+   "t_ms": 855,
+   "msg": "R1 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 32,
+   "t_ms": 907,
+   "msg": "W2 wants to write",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Reading",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 33,
+   "t_ms": 926,
+   "msg": "R2 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 34,
+   "t_ms": 941,
+   "msg": "R3 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Waiting",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 35,
+   "t_ms": 941,
+   "msg": "R3 enters critical section (reads value = 3)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Reading",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 36,
+   "t_ms": 971,
+   "msg": "R3 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 37,
+   "t_ms": 981,
+   "msg": "R1 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 38,
+   "t_ms": 982,
+   "msg": "R1 enters critical section (reads value = 3)",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Reading"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 2,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 39,
+   "t_ms": 1047,
+   "msg": "R4 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 40,
+   "t_ms": 1094,
+   "msg": "R1 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Waiting",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 41,
+   "t_ms": 1094,
+   "msg": "W1 enters critical section (writing)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Writing",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W1",
+     "value": 3
+    }
+   }
+  },
+  {
+   "seq": 42,
+   "t_ms": 1115,
+   "msg": "W1 leaves critical section (value is now 4)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 4
+    }
+   }
+  },
+  {
+   "seq": 43,
+   "t_ms": 1115,
+   "msg": "W2 enters critical section (writing)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Writing"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W2",
+     "value": 4
+    }
+   }
+  },
+  {
+   "seq": 44,
+   "t_ms": 1139,
+   "msg": "W2 leaves critical section (value is now 5)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 45,
+   "t_ms": 1157,
+   "msg": "R3 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Waiting",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 46,
+   "t_ms": 1157,
+   "msg": "R3 enters critical section (reads value = 5)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Reading",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 47,
+   "t_ms": 1198,
+   "msg": "R3 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 48,
+   "t_ms": 1202,
+   "msg": "R1 wants to read",
+   "state": {
+    "readers": {
+     "R1": "Waiting",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 49,
+   "t_ms": 1203,
+   "msg": "R1 enters critical section (reads value = 5)",
+   "state": {
+    "readers": {
+     "R1": "Reading",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Being read",
+     "readers": 1,
+     "writer": "-",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 50,
+   "t_ms": 1378,
+   "msg": "R1 leaves critical section",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 51,
+   "t_ms": 1387,
+   "msg": "W2 wants to write",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Waiting"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 52,
+   "t_ms": 1387,
+   "msg": "W2 enters critical section (writing)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Writing"
+    },
+    "resource": {
+     "status": "Being written",
+     "readers": 0,
+     "writer": "W2",
+     "value": 5
+    }
+   }
+  },
+  {
+   "seq": 53,
+   "t_ms": 1420,
+   "msg": "W2 leaves critical section (value is now 6)",
+   "state": {
+    "readers": {
+     "R1": "Thinking",
+     "R2": "Thinking",
+     "R3": "Thinking",
+     "R4": "Thinking"
+    },
+    "writers": {
+     "W1": "Thinking",
+     "W2": "Thinking"
+    },
+    "resource": {
+     "status": "Idle",
+     "readers": 0,
+     "writer": "-",
+     "value": 6
+    }
+   }
+  }
+ ]
+}

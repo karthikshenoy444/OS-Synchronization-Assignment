@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Readers-Writers (Semaphores)</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1d2733;--mute:#667085;--line:#d8dde5}
+@media (prefers-color-scheme:dark){:root{--bg:#14181d;--card:#1e242c;--ink:#e8ecf1;--mute:#9aa5b3;--line:#333c48}}
+body{margin:0;font:15px/1.4 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+main{max-width:1000px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:0 0 4px} h3{margin:10px 0 2px;font-size:14px;color:var(--mute)}
+.sub{color:var(--mute);margin-bottom:8px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+button,select{padding:6px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px}
+.chip{display:inline-block;min-width:110px;margin:4px;padding:8px 10px;border-radius:6px;color:#111;text-align:center}
+#now{font-weight:600;margin:6px 0 10px;min-height:1.4em}
+#log{max-height:320px;overflow:auto;font:13px ui-monospace,monospace}
+#log div{padding:2px 6px;cursor:pointer;border-radius:4px}
+#log .now{background:#ffe08a;color:#111}
+svg text{fill:var(--ink)} .bad{color:#c0392b;font-weight:700}
+.legend span{display:inline-block;padding:1px 8px;margin:2px;border-radius:4px;color:#111;font-size:12px}
+</style></head><body><main>
+<h1>Readers-Writers (Semaphores)</h1>
+<div class="sub" id="sub"></div>
+<div class="bar">
+ <button id="play">Play</button><button id="step">Step</button><button id="reset">Reset</button>
+ <label>Speed <select id="speed"><option value="1000">slow</option><option value="500" selected>normal</option>
+ <option value="200">fast</option><option value="60">very fast</option></select></label>
+ <input type="range" id="slider" min="0" value="0" style="flex:1;min-width:160px">
+ <span id="count"></span>
+</div>
+<div id="now"></div>
+<div class="grid">
+ <div class="card"><div id="vis"></div><div class="legend" id="legend"></div></div>
+ <div class="card"><h3 style="margin-top:0">Event log (click to jump)</h3><div id="log"></div></div>
+</div>
+</main>
+<script>
+const T = {"title": "Readers-Writers (Semaphores)", "kind": "rw", "params": {"solution": "semaphore", "readers": 4, "writers": 2, "rounds": 3, "delay": 0.3}, "violations": 0, "events": [{"seq": 0, "t_ms": 29, "msg": "W1 wants to write", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 0}}}, {"seq": 1, "t_ms": 29, "msg": "W1 enters critical section (writing)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Writing", "W2": "Thinking"}, "resource": {"status": "Being written", "readers": 0, "writer": "W1", "value": 0}}}, {"seq": 2, "t_ms": 93, "msg": "R2 wants to read", "state": {"readers": {"R1": "Thinking", "R2": "Waiting", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Writing", "W2": "Thinking"}, "resource": {"status": "Being written", "readers": 0, "writer": "W1", "value": 0}}}, {"seq": 3, "t_ms": 107, "msg": "W1 leaves critical section (value is now 1)", "state": {"readers": {"R1": "Thinking", "R2": "Waiting", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 1}}}, {"seq": 4, "t_ms": 107, "msg": "R2 enters critical section (reads value = 1)", "state": {"readers": {"R1": "Thinking", "R2": "Reading", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 1}}}, {"seq": 5, "t_ms": 150, "msg": "W1 wants to write", "state": {"readers": {"R1": "Thinking", "R2": "Reading", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 1}}}, {"seq": 6, "t_ms": 159, "msg": "R4 wants to read", "state": {"readers": {"R1": "Thinking", "R2": "Reading", "R3": "Thinking", "R4": "Waiting"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 1}}}, {"seq": 7, "t_ms": 159, "msg": "R4 enters critical section (reads value = 1)", "state": {"readers": {"R1": "Thinking", "R2": "Reading", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 1}}}, {"seq": 8, "t_ms": 177, "msg": "W2 wants to write", "state": {"readers": {"R1": "Thinking", "R2": "Reading", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 1}}}, {"seq": 9, "t_ms": 236, "msg": "R2 leaves critical section", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 1}}}, {"seq": 10, "t_ms": 247, "msg": "R4 leaves critical section", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 1}}}, {"seq": 11, "t_ms": 247, "msg": "W1 enters critical section (writing)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Writing", "W2": "Waiting"}, "resource": {"status": "Being written", "readers": 0, "writer": "W1", "value": 1}}}, {"seq": 12, "t_ms": 254, "msg": "R1 wants to read", "state": {"readers": {"R1": "Waiting", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Writing", "W2": "Waiting"}, "resource": {"status": "Being written", "readers": 0, "writer": "W1", "value": 1}}}, {"seq": 13, "t_ms": 296, "msg": "R3 wants to read", "state": {"readers": {"R1": "Waiting", "R2": "Thinking", "R3": "Waiting", "R4": "Thinking"}, "writers": {"W1": "Writing", "W2": "Waiting"}, "resource": {"status": "Being written", "readers": 0, "writer": "W1", "value": 1}}}, {"seq": 14, "t_ms": 315, "msg": "R4 wants to read", "state": {"readers": {"R1": "Waiting", "R2": "Thinking", "R3": "Waiting", "R4": "Waiting"}, "writers": {"W1": "Writing", "W2": "Waiting"}, "resource": {"status": "Being written", "readers": 0, "writer": "W1", "value": 1}}}, {"seq": 15, "t_ms": 334, "msg": "R2 wants to read", "state": {"readers": {"R1": "Waiting", "R2": "Waiting", "R3": "Waiting", "R4": "Waiting"}, "writers": {"W1": "Writing", "W2": "Waiting"}, "resource": {"status": "Being written", "readers": 0, "writer": "W1", "value": 1}}}, {"seq": 16, "t_ms": 508, "msg": "W1 leaves critical section (value is now 2)", "state": {"readers": {"R1": "Waiting", "R2": "Waiting", "R3": "Waiting", "R4": "Waiting"}, "writers": {"W1": "Thinking", "W2": "Waiting"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 2}}}, {"seq": 17, "t_ms": 509, "msg": "W2 enters critical section (writing)", "state": {"readers": {"R1": "Waiting", "R2": "Waiting", "R3": "Waiting", "R4": "Waiting"}, "writers": {"W1": "Thinking", "W2": "Writing"}, "resource": {"status": "Being written", "readers": 0, "writer": "W2", "value": 2}}}, {"seq": 18, "t_ms": 528, "msg": "W1 wants to write", "state": {"readers": {"R1": "Waiting", "R2": "Waiting", "R3": "Waiting", "R4": "Waiting"}, "writers": {"W1": "Waiting", "W2": "Writing"}, "resource": {"status": "Being written", "readers": 0, "writer": "W2", "value": 2}}}, {"seq": 19, "t_ms": 606, "msg": "W2 leaves critical section (value is now 3)", "state": {"readers": {"R1": "Waiting", "R2": "Waiting", "R3": "Waiting", "R4": "Waiting"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 3}}}, {"seq": 20, "t_ms": 607, "msg": "R1 enters critical section (reads value = 3)", "state": {"readers": {"R1": "Reading", "R2": "Waiting", "R3": "Waiting", "R4": "Waiting"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 3}}}, {"seq": 21, "t_ms": 607, "msg": "R3 enters critical section (reads value = 3)", "state": {"readers": {"R1": "Reading", "R2": "Waiting", "R3": "Reading", "R4": "Waiting"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 3}}}, {"seq": 22, "t_ms": 607, "msg": "R4 enters critical section (reads value = 3)", "state": {"readers": {"R1": "Reading", "R2": "Waiting", "R3": "Reading", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 3, "writer": "-", "value": 3}}}, {"seq": 23, "t_ms": 607, "msg": "R2 enters critical section (reads value = 3)", "state": {"readers": {"R1": "Reading", "R2": "Reading", "R3": "Reading", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 4, "writer": "-", "value": 3}}}, {"seq": 24, "t_ms": 617, "msg": "R2 leaves critical section", "state": {"readers": {"R1": "Reading", "R2": "Thinking", "R3": "Reading", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 3, "writer": "-", "value": 3}}}, {"seq": 25, "t_ms": 656, "msg": "R3 leaves critical section", "state": {"readers": {"R1": "Reading", "R2": "Thinking", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 3}}}, {"seq": 26, "t_ms": 683, "msg": "R4 leaves critical section", "state": {"readers": {"R1": "Reading", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 3}}}, {"seq": 27, "t_ms": 731, "msg": "R2 wants to read", "state": {"readers": {"R1": "Reading", "R2": "Waiting", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 3}}}, {"seq": 28, "t_ms": 731, "msg": "R2 enters critical section (reads value = 3)", "state": {"readers": {"R1": "Reading", "R2": "Reading", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 3}}}, {"seq": 29, "t_ms": 805, "msg": "R4 wants to read", "state": {"readers": {"R1": "Reading", "R2": "Reading", "R3": "Thinking", "R4": "Waiting"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 3}}}, {"seq": 30, "t_ms": 805, "msg": "R4 enters critical section (reads value = 3)", "state": {"readers": {"R1": "Reading", "R2": "Reading", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 3, "writer": "-", "value": 3}}}, {"seq": 31, "t_ms": 855, "msg": "R1 leaves critical section", "state": {"readers": {"R1": "Thinking", "R2": "Reading", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 3}}}, {"seq": 32, "t_ms": 907, "msg": "W2 wants to write", "state": {"readers": {"R1": "Thinking", "R2": "Reading", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 3}}}, {"seq": 33, "t_ms": 926, "msg": "R2 leaves critical section", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 3}}}, {"seq": 34, "t_ms": 941, "msg": "R3 wants to read", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Waiting", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 3}}}, {"seq": 35, "t_ms": 941, "msg": "R3 enters critical section (reads value = 3)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Reading", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 3}}}, {"seq": 36, "t_ms": 971, "msg": "R3 leaves critical section", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 3}}}, {"seq": 37, "t_ms": 981, "msg": "R1 wants to read", "state": {"readers": {"R1": "Waiting", "R2": "Thinking", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 3}}}, {"seq": 38, "t_ms": 982, "msg": "R1 enters critical section (reads value = 3)", "state": {"readers": {"R1": "Reading", "R2": "Thinking", "R3": "Thinking", "R4": "Reading"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 2, "writer": "-", "value": 3}}}, {"seq": 39, "t_ms": 1047, "msg": "R4 leaves critical section", "state": {"readers": {"R1": "Reading", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 3}}}, {"seq": 40, "t_ms": 1094, "msg": "R1 leaves critical section", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Waiting", "W2": "Waiting"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 3}}}, {"seq": 41, "t_ms": 1094, "msg": "W1 enters critical section (writing)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Writing", "W2": "Waiting"}, "resource": {"status": "Being written", "readers": 0, "writer": "W1", "value": 3}}}, {"seq": 42, "t_ms": 1115, "msg": "W1 leaves critical section (value is now 4)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Waiting"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 4}}}, {"seq": 43, "t_ms": 1115, "msg": "W2 enters critical section (writing)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Writing"}, "resource": {"status": "Being written", "readers": 0, "writer": "W2", "value": 4}}}, {"seq": 44, "t_ms": 1139, "msg": "W2 leaves critical section (value is now 5)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 5}}}, {"seq": 45, "t_ms": 1157, "msg": "R3 wants to read", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Waiting", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 5}}}, {"seq": 46, "t_ms": 1157, "msg": "R3 enters critical section (reads value = 5)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Reading", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 5}}}, {"seq": 47, "t_ms": 1198, "msg": "R3 leaves critical section", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 5}}}, {"seq": 48, "t_ms": 1202, "msg": "R1 wants to read", "state": {"readers": {"R1": "Waiting", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 5}}}, {"seq": 49, "t_ms": 1203, "msg": "R1 enters critical section (reads value = 5)", "state": {"readers": {"R1": "Reading", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Being read", "readers": 1, "writer": "-", "value": 5}}}, {"seq": 50, "t_ms": 1378, "msg": "R1 leaves critical section", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 5}}}, {"seq": 51, "t_ms": 1387, "msg": "W2 wants to write", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Waiting"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 5}}}, {"seq": 52, "t_ms": 1387, "msg": "W2 enters critical section (writing)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Writing"}, "resource": {"status": "Being written", "readers": 0, "writer": "W2", "value": 5}}}, {"seq": 53, "t_ms": 1420, "msg": "W2 leaves critical section (value is now 6)", "state": {"readers": {"R1": "Thinking", "R2": "Thinking", "R3": "Thinking", "R4": "Thinking"}, "writers": {"W1": "Thinking", "W2": "Thinking"}, "resource": {"status": "Idle", "readers": 0, "writer": "-", "value": 6}}}]};
+const ev = T.events;
+const COL = {"Thinking":"#cfd8e3","Waiting":"#ffd166","Hungry":"#ffd166","Acquiring Forks":"#f4a261",
+  "Reading":"#52b788","Writing":"#e76f51","Eating":"#52b788","Releasing Forks":"#8ecae6"};
+const $ = id => document.getElementById(id);
+let i = 0, timer = null;
+
+const chip = (n, s) => `<span class="chip" style="background:${COL[s]||'#ddd'}"><b>${n}</b><br>${s}</span>`;
+
+function drawRW(s) {
+  const r = s.resource;
+  const col = r.status === "Idle" ? "#cfd8e3" : r.status === "Being read" ? "#52b788" : "#e76f51";
+  return `<h3>Readers</h3>${Object.entries(s.readers).map(([k,v])=>chip(k,v)).join("")}
+   <h3>Writers</h3>${Object.entries(s.writers).map(([k,v])=>chip(k,v)).join("")}
+   <h3>Shared resource (critical section)</h3>
+   <div class="chip" style="background:${col};min-width:240px"><b>${r.status}</b><br>
+   readers inside: ${r.readers} | writer inside: ${r.writer}<br>stored value: ${r.value}</div>`;
+}
+
+function drawDP(s) {
+  const names = Object.keys(s.philosophers), n = names.length, cx = 200, cy = 200;
+  const ang = (k, off) => (-90 + (k + off) * 360 / n) * Math.PI / 180;
+  const at = (k, off, rad) => [cx + rad * Math.cos(ang(k, off)), cy + rad * Math.sin(ang(k, off))];
+  let o = `<svg viewBox="0 0 400 400" style="width:100%;max-width:440px">
+    <circle cx="200" cy="200" r="68" fill="none" stroke="#999" stroke-dasharray="4"/>`;
+  Object.entries(s.forks).forEach(([f, owner], k) => {
+    const [x, y] = at(k, 0.5, 92);
+    if (owner !== "free") {
+      const [px, py] = at(names.indexOf(owner), 0, 140);
+      o += `<line x1="${x}" y1="${y}" x2="${px}" y2="${py}" stroke="#e76f51" stroke-width="4"/>`;
+    }
+    o += `<circle cx="${x}" cy="${y}" r="15" fill="${owner==='free'?'#fff':'#e76f51'}" stroke="#555"/>
+          <text x="${x}" y="${y+4}" text-anchor="middle" font-size="11" style="fill:#111">${f}</text>`;
+  });
+  names.forEach((p, k) => {
+    const [x, y] = at(k, 0, 160), st = s.philosophers[p];
+    o += `<circle cx="${x}" cy="${y}" r="38" fill="${COL[st]||'#ddd'}" stroke="#555"/>
+          <text x="${x}" y="${y-2}" text-anchor="middle" font-size="14" font-weight="700" style="fill:#111">${p}</text>
+          <text x="${x}" y="${y+13}" text-anchor="middle" font-size="9.5" style="fill:#111">${st}</text>`;
+  });
+  return o + "</svg><div style='color:var(--mute);font-size:13px'>Filled fork = held (line shows owner). White fork = free.</div>";
+}
+
+function show(k) {
+  i = Math.max(0, Math.min(ev.length - 1, k));
+  const e = ev[i];
+  $("vis").innerHTML = T.kind === "rw" ? drawRW(e.state) : drawDP(e.state);
+  $("now").innerHTML = `[${e.t_ms} ms] ` + (e.msg.startsWith("!!") ? `<span class="bad">${e.msg}</span>` : e.msg);
+  $("count").textContent = `event ${i + 1} / ${ev.length}`;
+  $("slider").value = i;
+  [...$("log").children].forEach((d, j) => d.className = j === i ? "now" : "");
+  const cur = $("log").children[i]; if (cur) cur.scrollIntoView({block: "nearest"});
+}
+function stop() { clearInterval(timer); timer = null; $("play").textContent = "Play"; }
+function play() {
+  if (timer) return stop();
+  if (i >= ev.length - 1) show(0);
+  $("play").textContent = "Pause";
+  timer = setInterval(() => { if (i >= ev.length - 1) stop(); else show(i + 1); }, +$("speed").value);
+}
+$("log").innerHTML = ev.map((e, k) => `<div onclick="show(${k})">${String(e.t_ms).padStart(5)} ms &nbsp;${e.msg}</div>`).join("");
+$("slider").max = ev.length - 1;
+$("legend").innerHTML = Object.entries(COL).filter(([k]) => T.kind==="rw" ? ["Thinking","Waiting","Reading","Writing"].includes(k) : !["Reading","Writing"].includes(k))
+  .map(([k, v]) => `<span style="background:${v}">${k}</span>`).join("");
+$("sub").textContent = Object.entries(T.params).map(([k, v]) => k + "=" + v).join("  |  ") + "  |  violations: " + T.violations;
+$("play").onclick = play; $("step").onclick = () => { stop(); show(i + 1); };
+$("reset").onclick = () => { stop(); show(0); };
+$("slider").oninput = e => { stop(); show(+e.target.value); };
+$("speed").onchange = () => { if (timer) { stop(); play(); } };
+show(0);
+</script></body></html>

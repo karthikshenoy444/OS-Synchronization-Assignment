@@ -1,0 +1,2065 @@
+{
+ "title": "Dining Philosophers - 4 philosophers (Monitor)",
+ "kind": "dp",
+ "params": {
+  "solution": "monitor",
+  "philosophers": 4,
+  "rounds": 3,
+  "delay": 0.3
+ },
+ "violations": 0,
+ "events": [
+  {
+   "seq": 0,
+   "t_ms": 22,
+   "msg": "P1 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Hungry",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 1,
+   "t_ms": 22,
+   "msg": "P1 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 2,
+   "t_ms": 22,
+   "msg": "P1 picks up F1",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P1",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 3,
+   "t_ms": 22,
+   "msg": "P1 picks up F2",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 4,
+   "t_ms": 22,
+   "msg": "P1 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Eating",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 5,
+   "t_ms": 64,
+   "msg": "P1 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Releasing Forks",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 6,
+   "t_ms": 64,
+   "msg": "P1 puts down F1",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Releasing Forks",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 7,
+   "t_ms": 64,
+   "msg": "P1 puts down F2",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Releasing Forks",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 8,
+   "t_ms": 64,
+   "msg": "P1 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 9,
+   "t_ms": 105,
+   "msg": "P3 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Hungry"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 10,
+   "t_ms": 105,
+   "msg": "P3 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 11,
+   "t_ms": 105,
+   "msg": "P3 picks up F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 12,
+   "t_ms": 105,
+   "msg": "P3 picks up F0",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 13,
+   "t_ms": 105,
+   "msg": "P3 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 14,
+   "t_ms": 128,
+   "msg": "P1 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Hungry",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 15,
+   "t_ms": 128,
+   "msg": "P1 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 16,
+   "t_ms": 128,
+   "msg": "P1 picks up F1",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 17,
+   "t_ms": 128,
+   "msg": "P1 picks up F2",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 18,
+   "t_ms": 128,
+   "msg": "P1 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Eating",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 19,
+   "t_ms": 184,
+   "msg": "P0 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Hungry",
+     "P1": "Eating",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 20,
+   "t_ms": 184,
+   "msg": "P0 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Eating",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 21,
+   "t_ms": 218,
+   "msg": "P1 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Releasing Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 22,
+   "t_ms": 218,
+   "msg": "P1 puts down F1",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Releasing Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 23,
+   "t_ms": 218,
+   "msg": "P1 puts down F2",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Releasing Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 24,
+   "t_ms": 218,
+   "msg": "P1 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 25,
+   "t_ms": 264,
+   "msg": "P1 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Hungry",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 26,
+   "t_ms": 264,
+   "msg": "P1 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 27,
+   "t_ms": 264,
+   "msg": "P1 picks up F1",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 28,
+   "t_ms": 264,
+   "msg": "P1 picks up F2",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Acquiring Forks",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 29,
+   "t_ms": 264,
+   "msg": "P1 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Eating",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 30,
+   "t_ms": 279,
+   "msg": "P2 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Eating",
+     "P2": "Hungry",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 31,
+   "t_ms": 279,
+   "msg": "P2 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Eating",
+     "P2": "Acquiring Forks",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 32,
+   "t_ms": 397,
+   "msg": "P3 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Eating",
+     "P2": "Acquiring Forks",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 33,
+   "t_ms": 397,
+   "msg": "P3 puts down F3",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Eating",
+     "P2": "Acquiring Forks",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 34,
+   "t_ms": 397,
+   "msg": "P3 puts down F0",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Eating",
+     "P2": "Acquiring Forks",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 35,
+   "t_ms": 397,
+   "msg": "P3 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Eating",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 36,
+   "t_ms": 468,
+   "msg": "P1 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Releasing Forks",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P1",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 37,
+   "t_ms": 468,
+   "msg": "P1 puts down F1",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Releasing Forks",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P1",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 38,
+   "t_ms": 468,
+   "msg": "P1 puts down F2",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Releasing Forks",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 39,
+   "t_ms": 468,
+   "msg": "P1 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 40,
+   "t_ms": 468,
+   "msg": "P0 picks up F0",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 41,
+   "t_ms": 468,
+   "msg": "P0 picks up F1",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 42,
+   "t_ms": 468,
+   "msg": "P0 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 43,
+   "t_ms": 468,
+   "msg": "P2 picks up F2",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "P2",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 44,
+   "t_ms": 468,
+   "msg": "P2 picks up F3",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 45,
+   "t_ms": 468,
+   "msg": "P2 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Eating",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 46,
+   "t_ms": 480,
+   "msg": "P2 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 47,
+   "t_ms": 480,
+   "msg": "P2 puts down F2",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 48,
+   "t_ms": 480,
+   "msg": "P2 puts down F3",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 49,
+   "t_ms": 480,
+   "msg": "P2 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 50,
+   "t_ms": 482,
+   "msg": "P0 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 51,
+   "t_ms": 482,
+   "msg": "P0 puts down F0",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 52,
+   "t_ms": 482,
+   "msg": "P0 puts down F1",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 53,
+   "t_ms": 482,
+   "msg": "P0 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 54,
+   "t_ms": 501,
+   "msg": "P0 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Hungry",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 55,
+   "t_ms": 501,
+   "msg": "P0 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 56,
+   "t_ms": 501,
+   "msg": "P0 picks up F0",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 57,
+   "t_ms": 501,
+   "msg": "P0 picks up F1",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 58,
+   "t_ms": 501,
+   "msg": "P0 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 59,
+   "t_ms": 517,
+   "msg": "P0 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 60,
+   "t_ms": 517,
+   "msg": "P0 puts down F0",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 61,
+   "t_ms": 517,
+   "msg": "P0 puts down F1",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 62,
+   "t_ms": 517,
+   "msg": "P0 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 63,
+   "t_ms": 530,
+   "msg": "P0 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Hungry",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 64,
+   "t_ms": 530,
+   "msg": "P0 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 65,
+   "t_ms": 530,
+   "msg": "P0 picks up F0",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 66,
+   "t_ms": 530,
+   "msg": "P0 picks up F1",
+   "state": {
+    "philosophers": {
+     "P0": "Acquiring Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 67,
+   "t_ms": 530,
+   "msg": "P0 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 68,
+   "t_ms": 640,
+   "msg": "P3 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Hungry"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 69,
+   "t_ms": 640,
+   "msg": "P3 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Eating",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 70,
+   "t_ms": 680,
+   "msg": "P0 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "P0",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 71,
+   "t_ms": 680,
+   "msg": "P0 puts down F0",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "P0",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 72,
+   "t_ms": 680,
+   "msg": "P0 puts down F1",
+   "state": {
+    "philosophers": {
+     "P0": "Releasing Forks",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 73,
+   "t_ms": 680,
+   "msg": "P0 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 74,
+   "t_ms": 680,
+   "msg": "P3 picks up F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 75,
+   "t_ms": 680,
+   "msg": "P3 picks up F0",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 76,
+   "t_ms": 680,
+   "msg": "P3 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 77,
+   "t_ms": 701,
+   "msg": "P2 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Hungry",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 78,
+   "t_ms": 701,
+   "msg": "P2 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 79,
+   "t_ms": 753,
+   "msg": "P3 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 80,
+   "t_ms": 753,
+   "msg": "P3 puts down F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 81,
+   "t_ms": 753,
+   "msg": "P3 puts down F0",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 82,
+   "t_ms": 753,
+   "msg": "P3 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 83,
+   "t_ms": 753,
+   "msg": "P2 picks up F2",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P2",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 84,
+   "t_ms": 753,
+   "msg": "P2 picks up F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 85,
+   "t_ms": 753,
+   "msg": "P2 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Eating",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 86,
+   "t_ms": 839,
+   "msg": "P2 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 87,
+   "t_ms": 839,
+   "msg": "P2 puts down F2",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 88,
+   "t_ms": 839,
+   "msg": "P2 puts down F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 89,
+   "t_ms": 839,
+   "msg": "P2 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 90,
+   "t_ms": 905,
+   "msg": "P2 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Hungry",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 91,
+   "t_ms": 905,
+   "msg": "P2 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 92,
+   "t_ms": 905,
+   "msg": "P2 picks up F2",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P2",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 93,
+   "t_ms": 905,
+   "msg": "P2 picks up F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Acquiring Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 94,
+   "t_ms": 905,
+   "msg": "P2 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Eating",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 95,
+   "t_ms": 924,
+   "msg": "P2 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "P2",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 96,
+   "t_ms": 924,
+   "msg": "P2 puts down F2",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P2"
+    }
+   }
+  },
+  {
+   "seq": 97,
+   "t_ms": 924,
+   "msg": "P2 puts down F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Releasing Forks",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 98,
+   "t_ms": 924,
+   "msg": "P2 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 99,
+   "t_ms": 1017,
+   "msg": "P3 is hungry",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Hungry"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 100,
+   "t_ms": 1017,
+   "msg": "P3 asks the monitor for forks",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 101,
+   "t_ms": 1017,
+   "msg": "P3 picks up F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 102,
+   "t_ms": 1017,
+   "msg": "P3 picks up F0",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Acquiring Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 103,
+   "t_ms": 1017,
+   "msg": "P3 is eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Eating"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 104,
+   "t_ms": 1041,
+   "msg": "P3 finished eating",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "P3"
+    }
+   }
+  },
+  {
+   "seq": 105,
+   "t_ms": 1041,
+   "msg": "P3 puts down F3",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "P3",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 106,
+   "t_ms": 1041,
+   "msg": "P3 puts down F0",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Releasing Forks"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  },
+  {
+   "seq": 107,
+   "t_ms": 1041,
+   "msg": "P3 goes back to thinking",
+   "state": {
+    "philosophers": {
+     "P0": "Thinking",
+     "P1": "Thinking",
+     "P2": "Thinking",
+     "P3": "Thinking"
+    },
+    "forks": {
+     "F0": "free",
+     "F1": "free",
+     "F2": "free",
+     "F3": "free"
+    }
+   }
+  }
+ ]
+}
